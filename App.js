@@ -14,7 +14,7 @@ const Stack = createStackNavigator()
 function App(){
   return(
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Star Map' screenOptions={{headerShown:false,}}>
+      <Stack.Navigator initialRouteName='Home' screenOptions={{headerShown:false,}}>
           <Stack.Screen name='Home' component={HomeScreen} />
           <Stack.Screen name='Daily Pics' component={DailyPicScreens} />
           <Stack.Screen name='Space Crafts' component={SpaceCraftsScreen} />
