@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, StyleSheet, Platform, StatusBar, SafeAreaView, Image , ScrollView} from 'react-native';
+import { Text, View, TextInput, StyleSheet, Platform, StatusBar, SafeAreaView, ImageBackground} from 'react-native';
 import { WebView } from 'react-native-webview';
-import MapView, {Marker}  from 'react-native-maps';
 
 
 export default class StarMapScreen extends Component {
@@ -13,13 +12,14 @@ export default class StarMapScreen extends Component {
         }
     }
     render() {
-        const { longitude, latitude } = this.state;
-        const path = 'https://virtualsky.lco.global/embed/index.html?longitude=${longitude}&latitude=${latitude}&constellations=true&constellationlabels=true&showstarlabels=true&gridlines_az=true&live=true&projection=stereo&showdate=false&showposition=false'
+        const path = 'https://virtualsky.lco.global/embed/index.html?longitude=${this.state.longitude}&latitude=${this.state.latitude}&constellations=true&constellationlabels=true&showstarlabels=true&gridlines_az=true&live=true&projection=stereo&showdate=false&showposition=false'
         return (
             <View style={{ flex: 1, backgroundColor: "#1a0023" }}>
                 <SafeAreaView style={styles.droidSafeArea} />
-                <ScrollView>
-                <View style={{ flex: 0.3, marginTop: 20, alignItems: 'center' }}>
+                <ImageBackground 
+                style={styles.backgroundImage}
+                source={require('../assets/stars.gif')}>
+                <View style={styles.container}>
                     <Text style={styles.titleText}>STAR MAP</Text>
                     <TextInput
                         style={styles.inputStyle}
@@ -30,6 +30,7 @@ export default class StarMapScreen extends Component {
                                 longitude: text
                             })
                         }}
+                        value={this.state.longitude}
                     />
                     <TextInput
                         style={styles.inputStyle}
@@ -40,33 +41,16 @@ export default class StarMapScreen extends Component {
                                 latitude: text
                             })
                         }}
+                        value={this.state.latitude}
                     />
                 </View>
                 
                 <WebView
                     scalesPageToFit={true}
                     source={{ uri: path }}
-                    style={{ marginTop: 20, marginBottom: 20, }}
+                    style={{ marginTop: 10, marginBottom: 20}}
                 />
-                
-                <View style={styles.mapContainer}>
-                    <MapView
-                        style={styles.map}
-                        region={{
-                            latitude: this.state.latitude,
-                            longitude: this.state.longitude,
-                            latitudeDelta: 100,
-                            longitudeDelta: 100
-                        }}
-                    >
-                        <Marker
-                            coordinate={{ latitude: this.state.latitude, longitude: this.state.longitude }}
-                        >
-                            <Image source={require('../assets/icon.png')} style={{ height: 50, width: 50 }} />
-                        </Marker>
-                    </MapView>
-                </View>
-                </ScrollView>
+                </ImageBackground>
 
             </View>
         );
@@ -75,8 +59,7 @@ export default class StarMapScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
+        flex: 0.5,
         alignItems: 'center'
     },
     droidSafeArea: {
@@ -111,7 +94,7 @@ const styles = StyleSheet.create({
     map: {
         width: "100%",
         height: "100%",
-        marginTop:100,
+        marginTop:10,
     }
    
     
