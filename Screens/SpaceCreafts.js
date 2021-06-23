@@ -1,50 +1,170 @@
-import React, { Component } from 'react';
-import { Text, View, StyleSheet, ImageBackground, StatusBar, Platform,SafeAreaView } from 'react-native';
+import React, { Component } from "react";
+import {
+    View,
+    Text,
+    StyleSheet,
+    SafeAreaView,
+    Platform,
+    StatusBar,
+    ImageBackground,
+    Alert,
+    Image,
+    FlatList,
+    Dimensions,
+    TouchableOpacity,
+    Linking, 
+    ScrollView
+} from "react-native";
+import axios from "axios";
 
 export default class SpaceCraftsScreen extends Component {
-    render() {
-        return (            
+    constructor(props) {
+        super(props);
+        this.state = {
+            aircrafts: [],
+        };
+    }
 
-            <View style={styles.container}>
-            <SafeAreaView style={styles.androidSafeArea} />
+    componentDidMount() {
+        this.getData()
+    }
 
-                <ImageBackground 
-                source={require('../assets/space.gif')}
-                style={styles.bgimg}
+    getData = () => {
+        axios
+            .get("https://ll.thespacedevs.com/2.0.0/config/spacecraft/")
+            .then(response => {
+                this.setState({ aircrafts: response.data.results })
+                console.log(response.data.results)
+            })
+            .catch(error => {
+                Alert.alert(error.message)
+            })
+    }
+
+
+
+    renderItem=({item})=>{
+        return(
+            <TouchableOpacity 
+                style={styles.renderitemview}
+                onPress={()=>Linking.openURL(item.wiki_link).catch(err => console.error("Couidn't Load Page"))}
                 >
-                <Text style={styles.headerText}>Space Crafts</Text>
+                <Image 
+                    source={{uri: item.image_url}}
+                    style={styles.desimage}
+                />
+                <Text style={styles.cardTitle}>{item.name}</Text>
+                <Text style={styles.cardsubTitle}>{item.agency.name}</Text>
+                <Text style={{fontSize:19, color:"white"}}>DESCRIPTION</Text>
+                <Text style={styles.cardText}>{item.agency.description}</Text>
+            </TouchableOpacity>
+        );        
+    }
+    
+    keyExtractor = (item,index) => index.toString()
 
-                <Text style={styles.text}>{"Sorry :( The content is yet to be updated. Check back again later!"}</Text>
-                </ImageBackground>
-                
-            </View>
-        )
+    render() {
+        if(Object.keys(this.state.aircrafts).length == 0){
+            return (
+                <View
+                    style={{flex:1, alignItems:"center", justifyContent:"center"}}>
+                    <Text style={styles.loadingText}>Loading...</Text>
+                </View>
+            )}
+            else{
+            return (
+                <View style={styles.container}>
+                    <SafeAreaView style={styles.droidSafeArea} />
+                    
+                    <ImageBackground 
+                    style={styles.backgroundImage}
+                    source={require('../assets/spacecrafts_bg.jpg')}>
+                    <View style={styles.titleBar}>
+                        <Text style={styles.titleText}>SPACECRAFTS</Text>
+                    </View>
+                    <ScrollView>
+                        <FlatList
+                        keyExtractor={this.keyExtractor}
+                        data={this.state.aircrafts}
+                        renderItem={this.renderItem}
+                        />
+                    </ScrollView>
+                    </ImageBackground>
+                </View>
+            );
+        }
     }
 }
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
+        flex: 1
+    },
+    droidSafeArea: {
+        marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+    },
+    backgroundImage: {
         flex: 1,
+        resizeMode: 'cover',
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height
     },
-    headerText:{
-        fontSize:50,
-        fontWeight:"bold",
-        color:"white",
-        textAlign:"center",
+    titleBar: {
+        flex: 0.15,
+        justifyContent: "center",
+        alignItems: "center",
+        margin:20,
+        backgroundColor:"rgba(52, 52, 52, 0.5)"
     },
-    text:{
-        fontSize:30,
-        color:"black",
-        textAlign:"center",
-        color:"white",
-        marginTop:100
+    titleText: {
+        fontSize: 30,
+        fontWeight: "bold",
+        color: "white",
+        margin:20,
+        padding:10,
     },
-    bgimg:{
-        flex:1,
-        resizeMode:'cover',
-        paddingBottom:50
+    iconContainer: {
+        margin:20,
+        justifyContent:"center",
+        alignItems:"center"
     },
-    androidSafeArea:{
-        marginTop:Platform.OS==='android'?StatusBar.currentHeight:0
+    cardTitle: {
+        fontSize: 20,
+        fontWeight: "bold",
+        color: "white",
+        textAlign:"center"
     },
-})
+    cardText: {
+        fontSize: 15,
+        color: "black",
+        marginLeft:10,
+        marginRight:10,
+    },
+    cardsubTitle: {
+        fontSize: 18,
+        fontWeight: "bold",
+        color: "red",
+        textAlign:"center"
+    },
+    renderitemview:{
+        borderWidth:1,
+        justifyContent:"center",
+        alignItems:"center",
+        marginBottom:10,
+        elevation:10,
+        margin:20,
+        borderRadius:20,
+        backgroundColor:"rgba(250, 250, 250, 0.5)",
+        padding:10,
+        marginTop:30,
+    },
+    desimage:{
+        width:'100%',
+        height:200,
+        marginTop:15,
+        marginBottom:15,
+        marginRight:10,
+        margin:5,
+        borderRadius:20
+    },
+});

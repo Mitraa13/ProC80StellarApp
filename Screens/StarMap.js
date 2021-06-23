@@ -12,13 +12,14 @@ export default class StarMapScreen extends Component {
         }
     }
     render() {
-        const path = 'https://virtualsky.lco.global/embed/index.html?longitude=${this.state.longitude}&latitude=${this.state.latitude}&constellations=true&constellationlabels=true&showstarlabels=true&gridlines_az=true&live=true&projection=stereo&showdate=false&showposition=false'
+        const {latitude, longitude} = this.state;
+        const path = 'https://virtualsky.lco.global/embed/index.html?longitude=${longitude}&latitude=${latitude}&constellations=true&constellationlabels=true&showstarlabels=true&gridlines_az=true&live=true&projection=stereo&showdate=false&showposition=false'
         return (
             <View style={{ flex: 1, backgroundColor: "#1a0023" }}>
                 <SafeAreaView style={styles.droidSafeArea} />
                 <ImageBackground 
                 style={styles.backgroundImage}
-                source={require('../assets/stars.gif')}>
+                source={require('../assets/starmap_bg.jpg')}>
                 <View style={styles.container}>
                     <Text style={styles.titleText}>STAR MAP</Text>
                     <TextInput

@@ -53,7 +53,7 @@ export default class DailyPicScreens extends Component {
                     <ScrollView style={styles.scrollView}>
                     <SafeAreaView style={styles.droidSafeArea} />
                     <ImageBackground
-                    source={require('../assets/stars.gif')}
+                    source={require('../assets/daily_pics_bg.jpg')}
                     style={styles.backgroundImage}>
                         <View style={styles.titleBar}>
                         <Text style={styles.titleText}>DAILY PICTURES</Text>
@@ -66,7 +66,7 @@ export default class DailyPicScreens extends Component {
                             >
                             <Image 
                                 source={{uri:this.state.apod.hdurl}}
-                                style={{height:200, width:200, alignSelf:"center", marginTop:10}}
+                                style={{height:200, width:200, alignSelf:"center", marginTop:10, borderRadius:20}}
                             />
                             </TouchableOpacity>
                             <Text style={styles.cardTitle}>{this.state.apod.title.toUpperCase()}</Text>
@@ -116,6 +116,9 @@ const styles = StyleSheet.create({
         color: "white",
         margin:10,
         fontSize:20,
+        backgroundColor:"rgba(52,52,52,0.5)",
+        padding:10,
+        borderRadius:20,
     },
     dateText:{
         textAlign:"right",

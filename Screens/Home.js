@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ImageBackground, StyleSheet, SafeAreaView, StatusBar, Platform, Image, TouchableOpacity } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Text, View, ImageBackground, StyleSheet, SafeAreaView, StatusBar, Platform, Image, TouchableOpacity, ScrollView } from 'react-native';
 
 
 export default class HomeScreen extends Component {
@@ -20,12 +19,12 @@ export default class HomeScreen extends Component {
                         />
 
                         <View style={styles.titleBar}>
-                            <Text style={styles.titleText}>STELLAR APP</Text>
+                            <Text style={styles.titleText}>EVERYTHING ABOUT SPACE</Text>
                         </View>
 
-
+                        <ScrollView>
                         <TouchableOpacity 
-                            style={styles.routeCard}
+                            style={styles.routeCardLeft}
                             onPress={()=>{
                                 this.props.navigation.navigate('Space Crafts')
                             }}>
@@ -38,7 +37,7 @@ export default class HomeScreen extends Component {
 
 
                         <TouchableOpacity 
-                            style={styles.routeCard}
+                            style={styles.routeCardRight}
                             onPress={()=>{
                                 this.props.navigation.navigate('Star Map')
                             }}>
@@ -51,16 +50,53 @@ export default class HomeScreen extends Component {
 
 
                         <TouchableOpacity 
-                            style={styles.routeCard}
+                            style={styles.routeCardLeft}
                             onPress={()=>{
                                 this.props.navigation.navigate('Daily Pics')
                             }}>
-                            <Text style={styles.routeText}>Daily Pictures</Text>
+                            <Text style={styles.routeText}>Daily Pics</Text>
                             <Image
                                 source={require('../assets/daily_pictures.png')}
                                 style={styles.iconImage}
                             />
                         </TouchableOpacity>
+                        
+                        <TouchableOpacity 
+                            style={styles.routeCardRight}
+                            onPress={()=>{
+                                this.props.navigation.navigate('Iss Location')
+                            }}>
+                            <Text style={styles.routeText}>Iss Location</Text>
+                            <Image
+                                source={require('../assets/iss_icon.png')}
+                                style={styles.iconImage}
+                            />
+                        </TouchableOpacity>
+                        
+                        <TouchableOpacity 
+                            style={styles.routeCardLeft}
+                            onPress={()=>{
+                                this.props.navigation.navigate('Meteors')
+                            }}>
+                            <Text style={styles.routeText}>Meteors</Text>
+                            <Image
+                                source={require('../assets/meteor_icon.png')}
+                                style={styles.iconImage}
+                            />
+                        </TouchableOpacity>
+                        
+                        <TouchableOpacity 
+                            style={styles.routeCardRight}
+                            onPress={()=>{
+                                this.props.navigation.navigate('Updates')
+                            }}>
+                            <Text style={styles.routeText}>Updates</Text>
+                            <Image
+                                source={require('../assets/rocket_icon.png')}
+                                style={styles.iconImage}
+                            />
+                        </TouchableOpacity>
+                        </ScrollView>
                     </ImageBackground>
                 </ScrollView>
             </View>
@@ -75,13 +111,14 @@ const styles = StyleSheet.create({
     bgimg:{
         flex:1,
         resizeMode:'cover',
-        paddingBottom:50
+        paddingBottom:50,
+        padding:10,
     },
     androidSafeArea:{
         marginTop:Platform.OS==='android'?StatusBar.currentHeight:0
     },
     titleText:{
-        fontSize:40,
+        fontSize:30,
         fontWeight:"bold",
         color:"white",
         textAlign:"center",
@@ -93,21 +130,30 @@ const styles = StyleSheet.create({
         alignItems:"center",
     },
     routeText:{
-        fontSize:25,
+        fontSize:20,
         fontWeight:"bold",
         color:"darkviolet",
         marginTop:10,
-        paddingLeft:10,
         padding:10,
         textAlign:"center",
     },
-    routeCard:{
-        flex:0.25,
-        marginLeft:20,
-        marginRight:20,
+    routeCardLeft:{
+        flex:0.5,
         marginTop:50,
         borderRadius:50,
         backgroundColor:"white",
+        width:250,
+        height:80,
+        alignSelf:"flex-start"
+    },
+    routeCardRight:{
+        flex:0.5,
+        marginTop:50,
+        borderRadius:50,
+        backgroundColor:"white",
+        width:250,
+        height:80,
+        alignSelf:"flex-end"
     },
     iconImage:{
         position:'absolute',
