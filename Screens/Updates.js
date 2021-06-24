@@ -93,7 +93,7 @@ export default class UpdateScreen extends Component {
                         <View style={styles.iconContainer}>
                             <Image 
                             source={{uri: item.imageUrl}}
-                            style={styles.desimage}
+                            style={{width:300, height:170}}
                             />
                         </View>
                     </TouchableOpacity>
@@ -109,7 +109,7 @@ export default class UpdateScreen extends Component {
                         <View style={styles.iconContainer}>
                             <Image 
                             source={{uri:item.imageUrl}}
-                            style={styles.desimage}
+                            style={{width:300, height:170}}
                             />
                         </View>
                     </TouchableOpacity>
@@ -177,47 +177,34 @@ const styles = StyleSheet.create({
         flex: 0.15,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: 'rgba(52, 52, 52, 0.5)',
-        marginTop:20,
+        margin:20,
+        backgroundColor:"rgba(52, 52, 52, 0.5)"
     },
     titleText: {
         fontSize: 30,
         fontWeight: "bold",
         color: "white",
-        margin:10,
-        padding:10,
-    },
-    listContainer:{
-        borderWidth:1,
-        justifyContent:"center",
-        alignItems:"center",
-        marginBottom:10,
-        elevation:10,
         margin:20,
-        borderRadius:20,
-        backgroundColor:"rgba(250, 250, 250, 0.5)",
         padding:10,
-        marginTop:30,
     },
     iconContainer: {
         margin:20,
         justifyContent:"center",
-        alignItems:"center",
+        alignItems:"center"
+    },
+    listContainer: {
+        backgroundColor:"rgba(250, 250, 250, 0.5)",
+        justifyContent: "center",
+        marginLeft: 10,
+        marginRight: 10,
+        borderRadius: 20,
+        padding: 20,
+        marginTop:70,
     },
     cardTitle: {
         fontSize: 20,
         fontWeight: "bold",
         color: "white",
-        textAlign:"center",
-        marginTop:30,
-    },
-    desimage:{
-        width:'100%',
-        height:200,
-        marginTop:15,
-        marginBottom:15,
-        marginRight:10,
-        margin:5,
-        borderRadius:20
+        marginTop:25,
     },
 });

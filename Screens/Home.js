@@ -23,18 +23,18 @@ export default class HomeScreen extends Component {
                         </View>
 
                         <ScrollView>
+                            
                         <TouchableOpacity 
                             style={styles.routeCardLeft}
                             onPress={()=>{
-                                this.props.navigation.navigate('Space Crafts')
+                                this.props.navigation.navigate('Iss Location')
                             }}>
-                            <Text style={styles.routeText}>Space Crafts</Text>
+                            <Text style={styles.routeText}>Iss Location</Text>
                             <Image
-                                source={require('../assets/space_crafts.png')}
+                                source={require('../assets/iss_icon.png')}
                                 style={styles.iconImage}
                             />
                         </TouchableOpacity>
-
 
                         <TouchableOpacity 
                             style={styles.routeCardRight}
@@ -47,7 +47,6 @@ export default class HomeScreen extends Component {
                                 style={styles.iconImage}
                             />
                         </TouchableOpacity>
-
 
                         <TouchableOpacity 
                             style={styles.routeCardLeft}
@@ -64,23 +63,23 @@ export default class HomeScreen extends Component {
                         <TouchableOpacity 
                             style={styles.routeCardRight}
                             onPress={()=>{
-                                this.props.navigation.navigate('Iss Location')
-                            }}>
-                            <Text style={styles.routeText}>Iss Location</Text>
-                            <Image
-                                source={require('../assets/iss_icon.png')}
-                                style={styles.iconImage}
-                            />
-                        </TouchableOpacity>
-                        
-                        <TouchableOpacity 
-                            style={styles.routeCardLeft}
-                            onPress={()=>{
                                 this.props.navigation.navigate('Meteors')
                             }}>
                             <Text style={styles.routeText}>Meteors</Text>
                             <Image
                                 source={require('../assets/meteor_icon.png')}
+                                style={styles.iconImage}
+                            />
+                        </TouchableOpacity>
+
+                        <TouchableOpacity 
+                            style={styles.routeCardLeft}
+                            onPress={()=>{
+                                this.props.navigation.navigate('Space Crafts')
+                            }}>
+                            <Text style={styles.routeText}>Space Crafts</Text>
+                            <Image
+                                source={require('../assets/space_crafts.png')}
                                 style={styles.iconImage}
                             />
                         </TouchableOpacity>

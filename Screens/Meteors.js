@@ -130,24 +130,21 @@ const styles = StyleSheet.create({
         marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
     },
     backgroundImage: {
-        flex: 1,
+        flex: 1.25,
         resizeMode: 'cover',
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height
     },
     titleBar: {
-        flex: 0.15,
+        flex: 0.05,
         justifyContent: "center",
         alignItems: "center",
-        margin:20,
-        backgroundColor:"rgba(52, 52, 52, 0.5)"
+        padding:10,
     },
     titleText: {
         fontSize: 30,
         fontWeight: "bold",
-        color: "white",
-        margin:20,
-        padding:10,
+        color: "black",
     },
     meteorContainer: {
         flex: 0.85

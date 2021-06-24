@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import HomeScreen from './Screens/Home';
 import DailyPicScreens from './Screens/DailyPic';
-import SpaceCraftsScreen from './Screens/SpaceCreafts';
+import SpaceCraftsScreen from './Screens/SpaceCrafts';
 import StarMapScreen from './Screens/StarMap';
 import IssLocationScreen from "./Screens/IssLocation";
 import MeteorScreen from "./Screens/Meteors";
